@@ -94,7 +94,7 @@ const SearchTicket = () => {
                                         options={cityOptions}
                                         placeholder="İl veya ilçe adı yazın"
                                         innerRef={register()}
-                                        onChange={(e) => { if (e.value == to.value) { setfrom(to); setto(from) } else { setfrom(e) } }}
+                                        onChange={(e) => { if (e.value === to.value) { setfrom(to); setto(from) } else { setfrom(e) } }}
                                         value={from}
                                     />
                                 )}
@@ -121,7 +121,7 @@ const SearchTicket = () => {
                                         value={to}
                                         innerRef={register()}
                                         placeholder="İl veya ilçe adı yazın"
-                                        onChange={(e) => { if (e.value == from.value) { setto(from); setfrom(to) } else { setto(e) } }}
+                                        onChange={(e) => { if (e.value === from.value) { setto(from); setfrom(to) } else { setto(e) } }}
                                     />
                                 )}
                             />
@@ -158,6 +158,9 @@ const SearchTicket = () => {
                             <Button onClick={() => { setdepartureDate(tomorrow); setBcolor(!bcolor) }} style={{ backgroundColor: !bcolor ? 'gray' : 'white' }}
                                 className='dateButtons'>Yarın</Button>
                         </Row>
+                        {/* <Row  className='m-1' style={{ display: 'flex', alignItems: 'center' }}>
+                            <button className='yesterday'>Bugün</button>
+                        </Row> */}
                     </Col>
                 </Row>
                 <Row style={{ height: '25%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>

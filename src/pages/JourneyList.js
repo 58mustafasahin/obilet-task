@@ -4,10 +4,12 @@ import { useParams } from 'react-router-dom'
 import { GetJourneys } from '../redux/oBilet/action'
 import JourneyCard from '../components/JourneyCard'
 import Vehicles from '../components/Vehicles'
+import SearchBar from '../components/search/SearchBar'
+import { Card } from 'reactstrap'
 
 const JourneyList = () => {
     const { originId, destinationId, departureDate } = useParams()
-   
+
 
     const { journeys } = useSelector(state => state.oBiletReducer)
 
@@ -30,15 +32,21 @@ const JourneyList = () => {
         }
         dispatch(GetJourneys(data))
     }, [])
-    
+    const from = JSON.parse(localStorage.getItem("from"))
+    const to = JSON.parse(localStorage.getItem("to"))
     return (
         <div>
-            <Vehicles/>
+            <Vehicles />
+            <SearchBar/>
             {
-            journeys?.data?.length==0?"Sivas - Kırşehir arasında otobüs seferi bulunamamaktadır. Dilerseniz farklı bir tarih seçerek tekrar deneyebilirsiniz":
-                journeys?.data?.map((item, key) => (
-                    <JourneyCard key={key} item={item} />
-                ))
+                journeys?.data?.length === 0 ?
+                    <Card style={{ display: 'flex', alignItems: 'center' }}>                   
+                        {`${from.label} - ${to.label} arasında otobüs seferi bulunamamaktadır. Dilerseniz farklı bir tarih seçerek tekrar deneyebilirsiniz`}
+                    </Card>
+                    :
+                    journeys?.data?.map((item, key) => (
+                        <JourneyCard key={key} item={item} />
+                    ))
             }
         </div>
     )
